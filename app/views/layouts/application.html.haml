@@ -10,9 +10,9 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    .grid.grid-cols-4.h-screen.w-full
+    .grid.grid-cols-1.h-screen.w-full{class: 'md:grid-cols-3 lg:grid-cols-4'}
       / Tags
-      #tags-list.col-span-1.bg-neutral-800.h-full.divide-y.divide-neutral-700.overflow-scroll
+      #tags-list.col-span-1.bg-neutral-800.h-full.divide-y.divide-neutral-700.overflow-scroll.hidden{class: 'lg:block'}
         %div.py-5
           .flex.flex-row.justify-start.uppercase.text-xs.px-7.font-medium.text-neutral-400
             Categories
@@ -34,7 +34,7 @@
                   = tag[1..-1]
 
 
-      #notes-list.col-span-1.bg-neutral-100.h-full.overflow-scroll
+      #notes-list.col-span-1.bg-neutral-100.h-full.overflow-scroll.hidden{class: 'md:block'}
         .flex.flex-row.justify-between.items-center.uppercase.text-xs.px-5.font-medium.text-neutral-400.pt-5.pb-3.border-b.sticky
           Notes
           = link_to notes_path(tag: @tag) do

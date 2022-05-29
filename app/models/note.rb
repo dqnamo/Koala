@@ -1,6 +1,8 @@
 class Note < ApplicationRecord
   before_create :set_slug
 
+  belongs_to :user, optional: true
+
   def set_slug
     return slug if slug.present?
 

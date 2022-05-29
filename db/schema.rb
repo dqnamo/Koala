@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_29_135617) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_142206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_135617) do
     t.datetime "updated_at", null: false
     t.string "tags", default: [], array: true
     t.string "slug"
+    t.bigint "user_id"
+    t.string "session_id"
+    t.index ["session_id"], name: "index_notes_on_session_id"
     t.index ["slug"], name: "index_notes_on_slug", unique: true
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

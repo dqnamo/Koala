@@ -1,0 +1,60 @@
+-# %h2 Log in
+-# = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+-#   .field
+-#     = f.label :email
+-#     %br/
+-#     = f.email_field :email, autofocus: true, autocomplete: "email"
+-#   .field
+-#     = f.label :password
+-#     %br/
+-#     = f.password_field :password, autocomplete: "current-password"
+-#   - if devise_mapping.rememberable?
+-#     .field
+-#       = f.check_box :remember_me
+-#       = f.label :remember_me
+-#   .actions
+-#     = f.submit "Log in"
+-# = render "devise/shared/links"
+
+
+.min-h-screen.flex
+  .flex-1.flex.flex-col.justify-center.py-12.px-4.sm:px-6.lg:flex-none.lg:px-20.xl:px-24
+    .mx-auto.w-full.max-w-sm.lg:w-96
+      %div
+        .flex.flex-row.gap-2.items-center
+          = image_tag 'koala.png', class: 'w-auto h-20'
+          = image_tag 'logo-text.png', class: 'w-auto h-12'
+        -# %h2.mt-6.text-3xl.font-extrabold.text-gray-900 Sign in to view your notes
+        %p.mt-2.text-sm.text-gray-600
+          -# %a.font-medium.hover:text-indigo-500{:href => "#"} Sign in to view your notes
+      .mt-8
+        .mt-6
+          %form.space-y-6{:action => "#", :method => "POST"}
+            %div
+              %label.block.text-sm.font-medium.text-gray-700{:for => "email"} Email address
+              .mt-1
+                %input#email.appearance-none.block.w-full.px-3.py-2.border.border-gray-300.rounded-md.shadow-sm.placeholder-gray-400.focus:outline-none.focus:ring-indigo-500.focus:border-indigo-500.sm:text-sm{:autocomplete => "email", :name => "email", :required => "", :type => "email"}/
+            .space-y-1
+              %label.block.text-sm.font-medium.text-gray-700{:for => "password"} Password
+              .mt-1
+                %input#password.appearance-none.block.w-full.px-3.py-2.border.border-gray-300.rounded-md.shadow-sm.placeholder-gray-400.focus:outline-none.focus:ring-indigo-500.focus:border-indigo-500.sm:text-sm{:autocomplete => "current-password", :name => "password", :required => "", :type => "password"}/
+            .flex.items-center.justify-between
+              .flex.items-center
+                %input#remember-me.h-4.w-4.text-indigo-600.focus:ring-indigo-500.border-gray-300.rounded{:name => "remember-me", :type => "checkbox"}/
+                %label.ml-2.block.text-sm.text-gray-900{:for => "remember-me"} Remember me
+              .text-sm
+                %a.font-medium.text-sky-400.hover:text-indigo-500{:href => "#"} Forgot your password?
+            %div
+              %button.w-full.flex.justify-center.py-2.px-4.border.border-transparent.rounded-md.shadow-sm.text-sm.font-medium.text-white.bg-primary.hover:bg-primary-600.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-primary-600{:type => "submit"} Sign in
+  
+        .mt-6.relative
+          .absolute.inset-0.flex.items-center{"aria-hidden" => "true"}
+            .w-full.border-t.border-gray-300
+          .relative.flex.justify-center.text-sm
+            %span.px-2.bg-white.text-gray-500 Or
+
+        %div
+          = link_to notes_path do
+            %button.mt-5.w-full.flex.justify-center.py-2.px-4.border.border-transparent.rounded-md.shadow-sm.text-sm.font-medium.text-white.bg-sky-400.hover:bg-sky-500.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-sky-500{:type => "submit"} Jot something down
+  .hidden.lg:block.relative.w-0.flex-1
+    %img.absolute.inset-0.h-full.w-full.object-cover{:alt => "", :src => "https://images.unsplash.com/photo-1519562990232-845beca99938?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"}/

@@ -8,10 +8,10 @@
 -#       = button_to 'Destroy this note', note_path(@note), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
 -#     = link_to 'Back to notes', notes_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
 
-#note.col-span-2.bg-neutral-50.pt-10.px-10.pb-2{'data-controller': 'note'}
+#note.col-span-2.bg-neutral-50.pt-7.px-7.pb-2{'data-controller': 'note'}
   = link_to note_path(@note), data: { "turbo-method": :delete }, class: 'absolute right-10 top-5 flex flex-row items-center gap-2 uppercase text-xs text-red-500' do
     %i.text-white.w-3.text-red-500{'data-feather': "trash"}
     Delete Note
 
   = form_for @note, html: {class: 'h-full', 'data-note-target': 'form'} do |form|
-    = form.text_area :content, data: {'action': 'note#saveNote', 'note-id': @note.id}, class: 'h-full outline-0 w-full focus:ring-0 outline-none border-0 bg-neutral-50', placeholder: 'Write a new note here...'
+    = form.text_area :content, data: {'action': 'note#saveNote', 'note-id': @note.slug}, class: 'h-full outline-0 w-full focus:ring-0 outline-none border-0 bg-neutral-50', placeholder: 'Write a new note here...'

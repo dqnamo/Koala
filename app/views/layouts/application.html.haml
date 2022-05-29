@@ -43,7 +43,7 @@
               New Note
             
         - @notes.each do |note|
-          = link_to note_path(note, tag: @tag) do
+          = link_to note_path(id: note.slug, tag: @tag) do
             .p-5.flex.flex-col.gap-1.border-b.relative{class: "hover:bg-neutral-200 #{@note == note ? 'bg-neutral-200': nil}"}
               - if @note == note
                 .absolute.w-1.bg-teal-400.inset-y-0.left-0.h-full

@@ -43,7 +43,7 @@ export default class extends Controller {
         data: formData,
         success: function (data) {
           data = JSON.parse(data);
-          noteInput.dataset.noteId = data.id
+          noteInput.dataset.noteId = data.slug
         }
       });
     }

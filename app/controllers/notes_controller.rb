@@ -11,7 +11,7 @@ class NotesController < ApplicationController
     end
 
     # @tags = @notes.connection.select_rows('select distinct unnest(tags) from notes').flatten
-
+    # TODO make this query below more effiecent
     @tags = @notes.pluck(:tags).flatten.uniq
   end
 
@@ -20,6 +20,7 @@ class NotesController < ApplicationController
     redirect_to notes_path if @note.nil?
 
     # @tags = Note.connection.select_rows('select distinct unnest(tags) from notes').flatten
+    # TODO make this query below more effiecent
     @tags = @notes.pluck(:tags).flatten.uniq
   end
 

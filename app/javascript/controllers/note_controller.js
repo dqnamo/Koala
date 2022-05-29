@@ -17,7 +17,7 @@ export default class extends Controller {
         url: `/notes/${noteInput.dataset.noteId}`,
         data: new FormData(this.formTarget),
         success: function (data) {
-          delete noteInput.dataset.noteId;
+          noteInput.dataset.noteId = '';
           return;
         }
       });

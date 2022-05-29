@@ -7,6 +7,10 @@ export default class extends Controller {
 
     const noteInput = event.currentTarget
 
+    const tagsRegex = /#[A-Za-z0-9]{1,}/g;
+    const tags = noteInput.value.match(tagsRegex);
+
+
     if(noteInput.value === ''){
       Rails.ajax({
         type: 'delete',
@@ -18,20 +22,25 @@ export default class extends Controller {
         }
       });
     }else if(event.currentTarget.hasAttribute('data-note-id')){
+      var formData = new FormData(this.formTarget)
+      if (tags !== null) formData.set('tags', tags)
+
       Rails.ajax({
         type: 'put',
         url: `/notes/${noteInput.dataset.noteId}`,
-        data: new FormData(this.formTarget),
+        data: formData,
         success: function (data) {
           data = JSON.parse(data);
         }
       });
-
     }else{
+      var formData = new FormData(this.formTarget)
+      if (tags !== null) formData.set('tags', tags)
+
       Rails.ajax({
         type: 'post',
         url: '/notes',
-        data: new FormData(this.formTarget),
+        data: formData,
         success: function (data) {
           data = JSON.parse(data);
           noteInput.dataset.noteId = data.id

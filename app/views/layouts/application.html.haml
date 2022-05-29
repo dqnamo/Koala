@@ -13,7 +13,23 @@
     .grid.grid-cols-4.h-screen.w-full
       / Tags
       #tags-list.col-span-1.bg-neutral-800.h-full
-        Tags
+        .flex.flex-row.justify-start.uppercase.text-sm.pl-7.pt-5.font-medium.text-neutral-400
+          Categories
+
+        .flex.flex-col.gap-1.py-2.px-5
+          = link_to notes_path do
+            .w-full.p-2.text-white.rounded-md{class: "hover:bg-neutral-700 #{@tag.nil? && controller_name == 'notes' && action_name == 'index' ? 'bg-neutral-700' : nil}"}
+              All notes
+
+        .flex.flex-row.justify-start.uppercase.text-sm.pl-7.pt-5.font-medium.text-neutral-400
+          Tags
+        .flex.flex-col.gap-1.px-5.py-2
+          - @tags.each do |tag|
+            = link_to notes_path(tag: tag) do
+              .w-full.p-2.text-white.rounded-md{class: "hover:bg-neutral-700 #{@tag == tag ? 'bg-neutral-700' : nil}"}
+                = tag
+
+
       #notes-list.col-span-1.bg-neutral-100.h-full.overflow-scroll
         - @notes.each do |note|
           = link_to note_path(note) do

@@ -10,5 +10,18 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    %main.container.mx-auto.mt-28.px-5.flex
+    .grid.grid-cols-4.h-screen.w-full
+      / Tags
+      #tags-list.col-span-1.bg-neutral-800.h-full
+        Tags
+      #notes-list.col-span-1.bg-neutral-100.h-full.overflow-scroll
+        - @notes.each do |note|
+          = link_to note_path(note) do
+            .p-5.flex.flex-col.gap-1.border-b{class: 'hover:bg-neutral-200'}
+              .text-neutral-800.font-medium.text-lg
+                = note.content.split("\n").first&.truncate(30)
+              .text-neutral-500.font-base.text-xs
+                #{time_ago_in_words(note.created_at)} ago
+              .text-neutral-700.font-base.text-sm
+                = note.content.truncate(70)
       = yield

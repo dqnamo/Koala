@@ -1,18 +1,27 @@
 class NotesController < ApplicationController
   before_action :set_note, only: %i[ show edit update destroy ]
-  before_action :set_tag, :set_notes
+  before_action :init_session, :set_tag, :set_notes
 
   # GET /notes or /notes.json
   def index
-    @note = Note.new
-    @tags = Note.connection.select_rows('select distinct unnest(tags) from notes').flatten
+    if current_user.present?
+      @note = Note.new
+    else
+      @note = Note.new(session_id: session[:session_id])
+    end
+
+    # @tags = @notes.connection.select_rows('select distinct unnest(tags) from notes').flatten
+    # TODO make this query below more effiecent
+    @tags = @notes.pluck(:tags).flatten.uniq
   end
 
   # GET /notes/1 or /notes/1.json
   def show
     redirect_to notes_path if @note.nil?
 
-    @tags = Note.connection.select_rows('select distinct unnest(tags) from notes').flatten
+    # @tags = Note.connection.select_rows('select distinct unnest(tags) from notes').flatten
+    # TODO make this query below more effiecent
+    @tags = @notes.pluck(:tags).flatten.uniq
   end
 
   # GET /notes/new
@@ -26,7 +35,7 @@ class NotesController < ApplicationController
 
   # POST /notes or /notes.json
   def create
-    @note = Note.new(note_params)
+    @note = current_user.present? ? current_user.notes.new(note_params) : Note.new(note_params)
 
     respond_to do |format|
       if @note.save
@@ -73,20 +82,26 @@ class NotesController < ApplicationController
       @note = Note.find_by(slug: params[:id])
     end
 
+    def init_session
+      session["init"] = true if !current_user.present?
+    end
+
     def set_tag
       @tag = params[:tag]
     end
 
     def set_notes
-      if @tag.present?
-        @notes = Note.where(":tags = ANY (tags)", tags: @tag)
+      if current_user.present?
+        @notes = current_user.notes.order(created_at: :desc)
       else
-        @notes = Note.all.order(created_at: :desc)
+        @notes = Note.where(session_id: session[:session_id]).order(created_at: :desc)
       end
+
+      @notes = @notes.where(":tags = ANY (tags)", tags: @tag) if @tag.present?
     end
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:content, :tags)
+      params.require(:note).permit(:content, :tags, :session_id)
     end
 end

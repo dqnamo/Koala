@@ -12,28 +12,41 @@
   %body
     .grid.grid-cols-4.h-screen.w-full
       / Tags
-      #tags-list.col-span-1.bg-neutral-800.h-full
-        .flex.flex-row.justify-start.uppercase.text-sm.pl-7.pt-5.font-medium.text-neutral-400
-          Categories
+      #tags-list.col-span-1.bg-neutral-800.h-full.divide-y.divide-neutral-700.overflow-scroll
+        %div.py-5
+          .flex.flex-row.justify-start.uppercase.text-xs.px-7.font-medium.text-neutral-400
+            Categories
 
-        .flex.flex-col.gap-1.py-2.px-5
-          = link_to notes_path do
-            .w-full.p-2.text-white.rounded-md{class: "hover:bg-neutral-700 #{@tag.nil? && controller_name == 'notes' && action_name == 'index' ? 'bg-neutral-700' : nil}"}
-              All notes
+          .flex.flex-col.gap-1.mt-2.px-5
+            = link_to notes_path do
+              .w-full.p-2.text-white.rounded-md.flex.flex-row.items-center.gap-2{class: "#{@tag.nil? ? 'bg-teal-400' : 'hover:bg-neutral-700'}"}
+                %i.text-white.w-4{'data-feather': "file"}
+                All Notes
 
-        .flex.flex-row.justify-start.uppercase.text-sm.pl-7.pt-5.font-medium.text-neutral-400
-          Tags
-        .flex.flex-col.gap-1.px-5.py-2
-          - @tags.each do |tag|
-            = link_to notes_path(tag: tag) do
-              .w-full.p-2.text-white.rounded-md{class: "hover:bg-neutral-700 #{@tag == tag ? 'bg-neutral-700' : nil}"}
-                = tag
+        %div
+          .flex.flex-row.justify-start.uppercase.text-xs.pl-7.pt-5.font-medium.text-neutral-400
+            Tags
+          .flex.flex-col.gap-1.px-5.py-2
+            - @tags.each do |tag|
+              = link_to notes_path(tag: tag) do
+                .flex.flex-row.items-center.gap-2.w-full.p-2.text-white.rounded-md{class: "#{@tag == tag ? 'bg-teal-400' : 'hover:bg-neutral-700'}"}
+                  %i.text-white.w-4{'data-feather': "hash"}
+                  = tag[1..-1]
 
 
       #notes-list.col-span-1.bg-neutral-100.h-full.overflow-scroll
+        .flex.flex-row.justify-between.items-center.uppercase.text-xs.px-5.font-medium.text-neutral-400.pt-5.pb-3.border-b.sticky
+          Notes
+          = link_to notes_path(tag: @tag) do
+            .flex.flex-row.gap-2.items-center.text-teal-400
+              %i.text-white.w-3.text-teal-400{'data-feather': "plus"}
+              New Note
+            
         - @notes.each do |note|
-          = link_to note_path(note) do
-            .p-5.flex.flex-col.gap-1.border-b{class: 'hover:bg-neutral-200'}
+          = link_to note_path(note, tag: @tag) do
+            .p-5.flex.flex-col.gap-1.border-b.relative{class: "hover:bg-neutral-200 #{@note == note ? 'bg-neutral-200': nil}"}
+              - if @note == note
+                .absolute.w-1.bg-teal-400.inset-y-0.left-0.h-full
               .text-neutral-800.font-medium.text-lg
                 = note.content.split("\n").first&.truncate(30)
               .text-neutral-500.font-base.text-xs

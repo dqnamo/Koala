@@ -10,7 +10,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    .flex.flex-row.justify-between.px-7.py-7.bg-primary{'data-controller': 'mobile-tabs', class: 'md:hidden'}
+    .flex.flex-row.justify-between.px-7.py-7.bg-primary{'data-controller': 'mobile-tabs', class: 'lg:hidden'}
       .flex.flex-row.items-center.gap-5
         %i.text-white.w-7{'data-feather': "hash", 'data-action': 'click->mobile-tabs#showTags'}
         %i.text-white.w-7{'data-feather': "file", 'data-action': 'click->mobile-tabs#showNotes'}
@@ -21,7 +21,7 @@
           Delete Note
 
 
-    .grid.grid-cols-1.h-screen.w-full{class: 'md:grid-cols-3 lg:grid-cols-4'}
+    .grid.grid-cols-1.h-screen.w-full{class: 'lg:grid-cols-4'}
       / Tags
       #tags-col.col-span-1.bg-primary.h-full.divide-y.divide-primary-600.overflow-scroll.hidden{class: 'lg:block'}
         %div.py-5
@@ -41,7 +41,7 @@
             = render 'notes/tags'
 
 
-      #notes-col.col-span-1.bg-neutral-100.h-full.overflow-scroll.hidden{class: 'md:block'}
+      #notes-col.col-span-1.bg-neutral-100.h-full.overflow-scroll.hidden{class: 'lg:block'}
         .flex.flex-row.justify-between.items-center.uppercase.text-xs.px-5.font-bold.text-primary-700.pt-5.pb-3.border-b.border-neutral-200.sticky
           Notes
           = link_to notes_path(tag: @tag) do

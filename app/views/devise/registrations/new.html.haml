@@ -1,21 +1,63 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+-# %h2 Sign up
+-# = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+-#   = render "devise/shared/error_messages", resource: resource
+-#   .field
+-#     = f.label :email
+-#     %br/
+-#     = f.email_field :email, autofocus: true, autocomplete: "email"
+-#   .field
+-#     = f.label :password
+-#     - if @minimum_password_length
+-#       %em
+-#         (#{@minimum_password_length} characters minimum)
+-#     %br/
+-#     = f.password_field :password, autocomplete: "new-password"
+-#   .field
+-#     = f.label :password_confirmation
+-#     %br/
+-#     = f.password_field :password_confirmation, autocomplete: "new-password"
+-#   .actions
+-#     = f.submit "Sign up"
+-# = render "devise/shared/links"
+
+
+.flex-1.flex.flex-col.justify-center.py-12.px-4.sm:px-6.lg:flex-none.lg:px-20.xl:px-24
+  .mx-auto.w-full.max-w-sm.lg:w-96
+    %div
+      .flex.flex-row.gap-2.items-center
+        = image_tag 'koala.png', class: 'w-auto h-20'
+        = image_tag 'logo-text.png', class: 'w-auto h-12'
+      %p.mt-2.text-sm.text-gray-600
+    .mt-8
+      .mt-6
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'space-y-6'}) do |f|
+          .text-gray-500.text-sm
+            Already signed up?
+            %span.text-sky-400
+              = link_to "Sign in", new_session_path(resource_name)
+          = render "devise/shared/error_messages", resource: resource
+          %div
+            %label.block.text-sm.font-medium.text-gray-700{:for => "email"} Email address
+            .mt-1
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Enter your email'
+              
+          .space-y-1
+            %label.block.text-sm.font-medium.text-gray-700{:for => "password"} Password
+            .mt-1
+              = f.password_field :password, autocomplete: "new-password", class: 'appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Enter password'
+          .space-y-1
+            %label.block.text-sm.font-medium.text-gray-700{:for => "password"} Password
+            .mt-1
+              = f.password_field :password_confirmation, autocomplete: "new-password", class: 'appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm', placeholder: 'Enter password again'
+          %div
+            = f.submit "Sign up", class: 'cursor-pointer w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600'
+
+      .mt-6.relative
+        .absolute.inset-0.flex.items-center{"aria-hidden" => "true"}
+          .w-full.border-t.border-gray-300
+        .relative.flex.justify-center.text-sm
+          %span.px-2.bg-white.text-gray-500 Or
+
+      %div
+        = link_to notes_path do
+          %button.mt-5.w-full.flex.justify-center.py-2.px-4.border.border-transparent.rounded-md.shadow-sm.text-sm.font-medium.text-white.bg-sky-400.hover:bg-sky-500.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-sky-500{:type => "submit"} Jot something down

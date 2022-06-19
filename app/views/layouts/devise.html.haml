@@ -10,4 +10,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    = yield
+    .min-h-screen.flex
+      = yield
+      .hidden.lg:block.relative.w-0.flex-1
+        %img.absolute.inset-0.h-full.w-full.object-cover{:alt => "", :src => "https://images.unsplash.com/photo-1519562990232-845beca99938?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"}/

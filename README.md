@@ -4,11 +4,14 @@ Koala is a free, open source, web based alternative to bear (note taking app on 
 
 
 
-Features to add:
+## Features to add:
 
-## Nested Tags
+#### #️⃣ Nested Tags
+Allow tags to be nested under each other for better organization.
 
-## Export Functionality
+#### 🚀 Export Functionality
+Adding exporting of notes in various file formats.
 
-## Markdown Support
+#### 🖊 Markdown Support
+Add support for markdown in notes.
 

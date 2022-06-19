@@ -10,7 +10,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    .flex.flex-row.gap-5.px-7.py-7.bg-primary{'data-controller': 'mobile-tabs'}
+    .flex.flex-row.gap-5.px-7.py-7.bg-primary.hidden{'data-controller': 'mobile-tabs', class: 'lg:block'}
       %i.text-white.w-7{'data-feather': "hash", 'data-action': 'click->mobile-tabs#showTags'}
       %i.text-white.w-7{'data-feather': "file", 'data-action': 'click->mobile-tabs#showNotes'}
       %i.text-white.w-7{'data-feather': "edit", 'data-action': 'click->mobile-tabs#showNote'}

@@ -14,6 +14,8 @@ class NotesController < ApplicationController
   # GET /notes/1 or /notes/1.json
   def show
     redirect_to notes_path if @note.nil?
+
+    redirect_to notes_path if @note.user.present? && @note.user != current_user
   end
 
   # GET /notes/new

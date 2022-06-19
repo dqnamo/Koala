@@ -9,7 +9,7 @@
 -#     = link_to 'Back to notes', notes_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
 
 #note.col-span-2.bg-neutral-50.pt-7.px-7.pb-2{'data-controller': 'note'}
-  = link_to note_path(id: @note.slug), data: { "turbo-method": :delete }, class: 'hidden md:absolute right-10 top-5 flex flex-row items-center gap-2 uppercase text-xs text-red-500' do
+  = link_to note_path(id: @note.slug), data: { "turbo-method": :delete }, class: 'hidden lg:block absolute right-10 top-5 flex flex-row items-center gap-2 uppercase text-xs text-red-500' do
     %i.text-white.w-3.text-red-500{'data-feather': "trash"}
     Delete Note
 

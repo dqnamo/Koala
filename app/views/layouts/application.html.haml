@@ -10,9 +10,13 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
+    .flex.flex-row.gap-5.px-7.py-7.bg-primary{'data-controller': 'mobile-tabs'}
+      %i.text-white.w-7{'data-feather': "hash", 'data-action': 'click->mobile-tabs#showTags'}
+      %i.text-white.w-7{'data-feather': "file", 'data-action': 'click->mobile-tabs#showNotes'}
+      %i.text-white.w-7{'data-feather': "edit", 'data-action': 'click->mobile-tabs#showNote'}
     .grid.grid-cols-1.h-screen.w-full{class: 'md:grid-cols-3 lg:grid-cols-4'}
       / Tags
-      .col-span-1.bg-primary.h-full.divide-y.divide-primary-600.overflow-scroll.hidden{class: 'lg:block'}
+      #tags-col.col-span-1.bg-primary.h-full.divide-y.divide-primary-600.overflow-scroll.hidden{class: 'lg:block'}
         %div.py-5
           .flex.flex-row.justify-start.uppercase.text-xs.px-7.font-medium.text-primary-50
             Categories
@@ -30,7 +34,7 @@
             = render 'notes/tags'
 
 
-      .col-span-1.bg-neutral-100.h-full.overflow-scroll.hidden{class: 'md:block'}
+      #notes-col.col-span-1.bg-neutral-100.h-full.overflow-scroll.hidden{class: 'md:block'}
         .flex.flex-row.justify-between.items-center.uppercase.text-xs.px-5.font-bold.text-primary-700.pt-5.pb-3.border-b.border-neutral-200.sticky
           Notes
           = link_to notes_path(tag: @tag) do

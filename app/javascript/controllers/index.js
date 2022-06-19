@@ -9,6 +9,9 @@ eagerLoadControllersFrom("controllers", application)
 import NoteController from "./note_controller.js"
 application.register("note", NoteController)
 
+import MobileTabsController from "./mobile_tabs_controller.js"
+application.register("mobile-tabs", MobileTabsController)
+
 // Lazy load controllers as they appear in the DOM (remember not to preload controllers in import map!)
 // import { lazyLoadControllersFrom } from "@hotwired/stimulus-loading"
 // lazyLoadControllersFrom("controllers", application)

@@ -1,24 +1,17 @@
-# README
+# 🐨 Koala
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Koala is a free, open source, web based alternative to bear (note taking app on apple devices).
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+## Features to add:
 
-* Configuration
+#### #️⃣ Nested Tags
+Allow tags to be nested under each other for better organization.
 
-* Database creation
+#### 🚀 Export Functionality
+Adding exporting of notes in various file formats.
 
-* Database initialization
+#### 🖊 Markdown Support
+Add support for markdown in notes.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

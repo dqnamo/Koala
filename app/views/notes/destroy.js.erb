@@ -1,0 +1,6 @@
+document.getElementById("note_content").removeAttribute('data-note-id');
+
+document.getElementById('<%= @note.slug %>').remove();
+
+document.getElementById('tags-list').innerHTML = "<%= escape_javascript render('notes/tags') %>";
+renderIcons();

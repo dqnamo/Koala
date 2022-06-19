@@ -12,7 +12,7 @@
   %body
     .grid.grid-cols-1.h-screen.w-full{class: 'md:grid-cols-3 lg:grid-cols-4'}
       / Tags
-      #tags-list.col-span-1.bg-primary.h-full.divide-y.divide-primary-600.overflow-scroll.hidden{class: 'lg:block'}
+      .col-span-1.bg-primary.h-full.divide-y.divide-primary-600.overflow-scroll.hidden{class: 'lg:block'}
         %div.py-5
           .flex.flex-row.justify-start.uppercase.text-xs.px-7.font-medium.text-primary-50
             Categories
@@ -26,12 +26,8 @@
         %div
           .flex.flex-row.justify-start.uppercase.text-xs.pl-7.pt-5.font-medium.text-primary-50
             Tags
-          .flex.flex-col.gap-1.px-5.py-2
-            - @tags.each do |tag|
-              = link_to notes_path(tag: tag) do
-                .flex.flex-row.items-center.gap-2.w-full.p-2.text-white.rounded-md{class: "#{@tag == tag ? 'bg-primary-400' : 'hover:bg-primary-400'}"}
-                  %i.text-white.w-4{'data-feather': "hash"}
-                  = tag[1..-1]
+          .flex.flex-col.gap-1.px-5.py-2#tags-list
+            = render 'notes/tags'
 
 
       #notes-list.col-span-1.bg-neutral-100.h-full.overflow-scroll.hidden{class: 'md:block'}
@@ -44,7 +40,7 @@
             
         - @notes.each do |note|
           = link_to note_path(id: note.slug, tag: @tag) do
-            .p-5.flex.flex-col.gap-1.border-b.border-neutral-200.relative{class: "hover:bg-sky-50 #{@note == note ? 'bg-sky-50': nil}"}
+            .p-5.flex.flex-col.gap-1.border-b.border-neutral-200.relative{class: "hover:bg-sky-50 #{@note == note ? 'bg-sky-50': nil}", id: note.slug}
               - if @note == note
                 .absolute.w-1.bg-sky-400.inset-y-0.left-0.h-full
               .text-neutral-800.font-medium.text-lg

@@ -1,0 +1,4 @@
+document.getElementById('<%= @note.slug %>').innerHTML = "<%= escape_javascript render('notes/note_content') %>";
+
+document.getElementById('tags-list').innerHTML = "<%= escape_javascript render('notes/tags') %>";
+renderIcons();

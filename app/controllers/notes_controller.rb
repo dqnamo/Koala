@@ -9,19 +9,11 @@ class NotesController < ApplicationController
     else
       @note = Note.new(session_id: session[:session_id])
     end
-
-    # @tags = @notes.connection.select_rows('select distinct unnest(tags) from notes').flatten
-    # TODO make this query below more effiecent
-    @tags = @notes.pluck(:tags).flatten.uniq
   end
 
   # GET /notes/1 or /notes/1.json
   def show
     redirect_to notes_path if @note.nil?
-
-    # @tags = Note.connection.select_rows('select distinct unnest(tags) from notes').flatten
-    # TODO make this query below more effiecent
-    @tags = @notes.pluck(:tags).flatten.uniq
   end
 
   # GET /notes/new
@@ -39,9 +31,9 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.js { render json: @note.to_json, status: :created }
-        format.html { redirect_to note_url(@note), notice: "Note was successfully created." }
-        format.json { render json: @note.to_json, status: :created, location: @note }
+        format.js
+        # format.html { redirect_to note_url(@note), notice: "Note was successfully created." }
+        # format.json { render json: @note.to_json, status: :created, location: @note }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -55,9 +47,11 @@ class NotesController < ApplicationController
       if @note.update(note_params)
         @note.update_column(:tags, params[:tags].split(',')) if params[:tags].present?
 
-        format.js { render json: @note.to_json, status: :created, location: @note }
-        format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
-        format.json { render :show, status: :ok, location: @note }
+        @tags = @notes.pluck(:tags).flatten.uniq
+
+        format.js
+        # format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
+        # format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -69,10 +63,11 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
 
+    @tags = @notes.pluck(:tags).flatten.uniq
     respond_to do |format|
       format.js
-      format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
-      format.json { head :no_content }
+      # format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
+      # format.json { head :no_content }
     end
   end
 
@@ -97,6 +92,9 @@ class NotesController < ApplicationController
         @notes = Note.where(session_id: session[:session_id]).order(created_at: :desc)
       end
 
+      # @tags = Note.connection.select_rows('select distinct unnest(tags) from notes').flatten
+      # TODO make this query below more effiecent
+      @tags = @notes.pluck(:tags).flatten.uniq
       @notes = @notes.where(":tags = ANY (tags)", tags: @tag) if @tag.present?
     end
 

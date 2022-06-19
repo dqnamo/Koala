@@ -1,0 +1,3 @@
+document.getElementById("note_content").dataset.noteId = '<%= @note.slug %>';
+
+document.getElementById("notes-list").innerHTML += "<%= escape_javascript render('notes/new_note') %>";

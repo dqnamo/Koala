@@ -10,10 +10,17 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    .flex.flex-row.gap-5.px-7.py-7.bg-primary{'data-controller': 'mobile-tabs', class: 'md:hidden'}
-      %i.text-white.w-7{'data-feather': "hash", 'data-action': 'click->mobile-tabs#showTags'}
-      %i.text-white.w-7{'data-feather': "file", 'data-action': 'click->mobile-tabs#showNotes'}
-      %i.text-white.w-7{'data-feather': "edit", 'data-action': 'click->mobile-tabs#showNote'}
+    .flex.flex-row.justify-between.px-7.py-7.bg-primary{'data-controller': 'mobile-tabs', class: 'md:hidden'}
+      .flex.flex-row.items-center.gap-5
+        %i.text-white.w-7{'data-feather': "hash", 'data-action': 'click->mobile-tabs#showTags'}
+        %i.text-white.w-7{'data-feather': "file", 'data-action': 'click->mobile-tabs#showNotes'}
+        %i.text-white.w-7{'data-feather': "edit", 'data-action': 'click->mobile-tabs#showNote'}
+      - if controller_name == 'notes' && action_name == 'show'
+        = link_to note_path(id: @note.slug), data: { "turbo-method": :delete }, class: 'flex flex-row items-center gap-2 uppercase text-xs text-white' do
+          %i.text-white.w-3{'data-feather': "trash"}
+          Delete Note
+
+
     .grid.grid-cols-1.h-screen.w-full{class: 'md:grid-cols-3 lg:grid-cols-4'}
       / Tags
       #tags-col.col-span-1.bg-primary.h-full.divide-y.divide-primary-600.overflow-scroll.hidden{class: 'lg:block'}

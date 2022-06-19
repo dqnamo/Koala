@@ -6,6 +6,10 @@ export default class extends Controller {
   saveNote(event){
     const noteInput = event.currentTarget
 
+    if(!noteInput.hasAttribute('data-note-id') && noteInput.value.length > 1){
+      return;
+    }
+
     const tagsRegex = /#[A-Za-z0-9-/]{1,}/g;
     const tags = noteInput.value.match(tagsRegex);
 

@@ -38,6 +38,7 @@
               %i.text-white.w-3.text-sky-400{'data-feather': "plus"}
               New Note
         #notes-list
+          
           - @notes.each do |note|
             = link_to note_path(id: note.slug, tag: @tag) do
               .p-5.flex.flex-col.gap-1.border-b.border-neutral-200.relative{class: "hover:bg-sky-50 #{@note == note ? 'bg-sky-50': nil}", id: note.slug}
@@ -49,4 +50,9 @@
                   #{time_ago_in_words(note.created_at)} ago
                 .text-neutral-700.font-base.text-sm
                   = note.content.truncate(70)
+          #empty-notes.mt-6{class: "#{@notes.present? ? 'hidden' : nil}"}
+            .text-center
+              %i.text-primary-500.w-12.mx-auto{'data-feather': "edit"}
+              %h3.mt-2.text-sm.font-medium.text-primary-500 No notes yet.
+              %p.mt-1.text-sm.text-primary-400 Get started by writing a something on the right.
       = yield

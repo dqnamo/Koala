@@ -61,6 +61,8 @@ class NotesController < ApplicationController
 
   # DELETE /notes/1 or /notes/1.json
   def destroy
+    return if @note.nil?
+    
     @note.destroy
 
     @tags = @notes.pluck(:tags).flatten.uniq

@@ -1,5 +1,11 @@
-- @tags.each do |tag|
-  = link_to notes_path(tag: tag) do
-    .flex.flex-row.items-center.gap-2.w-full.p-2.text-white.rounded-md{class: "#{@tag == tag ? 'bg-primary-400' : 'hover:bg-primary-400'}"}
-      %i.text-white.w-4{'data-feather': "hash"}
-      = tag[1..-1]
+- if @tags.present?
+  - @tags.each do |tag|
+    = link_to notes_path(tag: tag) do
+      .flex.flex-row.items-center.gap-2.w-full.p-2.text-white.rounded-md{class: "#{@tag == tag ? 'bg-primary-400' : 'hover:bg-primary-400'}"}
+        %i.text-white.w-4{'data-feather': "hash"}
+        = tag[1..-1]
+- else
+  #empty-tags.mt-6.text-center
+    %i.text-white.w-12.mx-auto{'data-feather': "hash"}
+    %h3.mt-2.text-sm.font-medium.text-white No tags yet.
+    %p.mt-1.text-sm.text-primary-50 Get started by writing a tag in a note using '#' followed by the tag name.

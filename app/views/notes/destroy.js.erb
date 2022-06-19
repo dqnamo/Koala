@@ -4,3 +4,7 @@ document.getElementById('<%= @note.slug %>').remove();
 
 document.getElementById('tags-list').innerHTML = "<%= escape_javascript render('notes/tags') %>";
 renderIcons();
+
+<% if !@notes.present? %>
+  document.getElementById('empty-notes').classList.remove('hidden')
+<% end %>
